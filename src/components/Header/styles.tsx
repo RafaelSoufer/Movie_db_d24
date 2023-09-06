@@ -27,10 +27,10 @@ export const HeaderContent = styled.div`
   margin: 0 20px 0 50px;
 
   @media (max-width: ${TABLET_BREAKPOINT}) {
-    margin: 0 10px 0 70px;
+    margin: 0  70px;
     justify-content: initial;
     & > *:first-child {
-      justify-self: flex-end;
+      justify-self: center;
     }
   }
 `;

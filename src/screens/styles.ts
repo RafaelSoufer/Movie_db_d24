@@ -12,13 +12,17 @@ export const Container = styled.div`
 export const Content = styled.div`
   z-index: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 100px;
 `;
 
-export const BGImage = styled.div<{imgPath?: string}>`
+export const BGImage = styled.div<{imgpath?: string}>`
   position: absolute;
   display: flex;
   background: ${props =>
-    `url(${`${IMAGES_BASE_URL}${props.imgPath}`}) no-repeat center center`};
+    `url(${`${IMAGES_BASE_URL}${props.imgpath}`}) no-repeat center center`};
   background-size: cover;
   overflow: hidden;
   width: 100%;
@@ -36,6 +40,19 @@ export const BGImage = styled.div<{imgPath?: string}>`
 `;
 
 export const BGImageFilter = styled.div`
-  display: flex;
   width: 100%;
+`;
+
+export const MovieInfoContainer = styled.div`
+  max-width: 50ch;
+  color: white;
+  text-shadow: 5px 4px 16px rgba(9, 22, 89, 0.3);
+`;
+
+export const MovieTitle = styled.h1`
+  font-size: 2.5rem;
+`;
+
+export const MovieDescription = styled.p`
+  font-size: 1rem;
 `;
