@@ -1,28 +1,15 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux'
-import { getMoviesAction } from './redux/movies/moviesSlice';
-import { useSelector } from 'react-redux';
-import { moviesListSelector } from './redux/movies/selectors';
-import { useAppDispatch } from './hooks/useAppDispatch';
+import MainScreen from './screens/MainScreen';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 
 function App() {
 
-  const dispatch = useAppDispatch();
-
-  const movieList = useSelector(moviesListSelector).results;
-
-
-
-  useEffect(() => {
-    dispatch(getMoviesAction())
-  }, [dispatch])
-
   return (
-    <div className="App">
-      <ul>
-        {movieList.map(movie => <li key={movie.id}>{movie.title}</li>)}
-      </ul>
-    </div>
+    <Provider store={store}>
+      <MainScreen />
+    </Provider>
   );
 }
 

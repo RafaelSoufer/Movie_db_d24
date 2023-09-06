@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.themoviedb.org/3/';
+export const BASE_URL = 'https://api.themoviedb.org/3/';
+export const IMAGES_BASE_URL = 'https://image.tmdb.org/t/p/w500/';
 
 export const API = axios.create({
   headers: {

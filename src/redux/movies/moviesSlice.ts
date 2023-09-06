@@ -17,11 +17,11 @@ const ACTION_TYPE = {
 type IActionType = keyof typeof ACTION_TYPE;
 
 export interface IMoviesState extends IGeneralState<typeof ACTION_TYPE> {
-  list: IMovieData;
+  movies: IMovieData;
 }
 
 const initialState: IMoviesState = {
-  list: {
+  movies: {
     page: 0,
     results: [],
     total_pages: 0,
@@ -59,10 +59,10 @@ const moviesSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getMoviesAction.fulfilled, (state, {payload}) => {
-        state.list = payload;
+        state.movies = payload;
       })
       .addCase(getMoviesAction.rejected, state => {
-        state.list = {
+        state.movies = {
           page: 0,
           results: [],
           total_pages: 0,

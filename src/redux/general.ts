@@ -1,4 +1,5 @@
-import {AxiosError, AxiosResponse} from 'axios';
+import {AxiosResponse} from 'axios';
+
 export const REQUEST_STATUS = {
   IDLE: 'IDLE',
   PENDING: 'PENDING',
