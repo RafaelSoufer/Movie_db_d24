@@ -3,10 +3,11 @@ import { useDispatch } from 'react-redux'
 import { getMoviesAction } from './redux/movies/moviesSlice';
 import { useSelector } from 'react-redux';
 import { moviesListSelector } from './redux/movies/selectors';
+import { useAppDispatch } from './hooks/useAppDispatch';
 
 function App() {
 
-  const dispatch = useDispatch<any>(); //TODO remove any from here
+  const dispatch = useAppDispatch();
 
   const movieList = useSelector(moviesListSelector).results;
 
