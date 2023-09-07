@@ -72,10 +72,37 @@ export interface IMovieDetail {
   vote_count: number;
 }
 
-const API_KEY = '0a74c88aa8c661e80f8512cc9947a908';
+export interface IMovieSearchResult {
+  page: number;
+  results: IMovieSearch[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface IMovieSearch {
+  adult: boolean;
+  backdrop_path: string | null;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string | null;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
 
 export const Get = {
   getMovies: () => API.get(`movie/popular`, {}),
   getMovieDetails: (movie_id: number) => API.get(`movie/${movie_id}`, {}),
-  //   getSingleMovie: (id: string) => API.get(`api/movie/${id}`, {}),
+  getSearchMovieByTitle: (query: string) =>
+    API.get(`search/movie`, {
+      params: {
+        query,
+      },
+    }),
 };

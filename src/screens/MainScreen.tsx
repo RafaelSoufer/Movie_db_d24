@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
-import { getMovieDatail, getMoviesAction, moviesActions } from '../redux/movies/moviesSlice';
+import { getMovieDatail, getMoviesAction, getSearchMovieByTitle, moviesActions } from '../redux/movies/moviesSlice';
 import { movieDetailSelector, moviesRequestSelector, moviesSelector } from '../redux/movies/selectors';
 import { Container, BGImage, Content, MovieInfoContainer, MovieTitle, MovieDescription } from './styles';
 import { REQUEST_STATUS } from '../redux/general';
@@ -26,6 +26,7 @@ function MainScreen() {
 
     useEffect(() => {
         dispatch(getMoviesAction())
+        dispatch(getSearchMovieByTitle({query:'Simone'}))
     }, [dispatch])
 
     useEffect(() => {

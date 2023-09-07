@@ -11,4 +11,5 @@ export const API = axios.create({
   timeout: 20000,
 });
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {};

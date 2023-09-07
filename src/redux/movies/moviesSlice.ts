@@ -7,19 +7,27 @@ import {
   isRejected,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import {Get, IMovieData, IMovieDetail} from '../../api/moviesRequests';
+import {
+  Get,
+  IMovieData,
+  IMovieDetail,
+  IMovieSearchResult,
+} from '../../api/moviesRequests';
 import {getApiErrorMessage, IGeneralState, REQUEST_STATUS} from '../general';
+import {EMPTY_MOVIE_DETAIL} from '../../utils';
 
 const ACTION_TYPE = {
   GET_MOVIES: 'GET_MOVIES',
   GET_MOVIE_DETAIL: 'GET_MOVIE_DETAIL',
+  GET_SEARCH_BY_TITLE: 'GET_SEARCH_BY_TITLE',
 };
 
 type IActionType = keyof typeof ACTION_TYPE;
 
 export interface IMoviesState extends IGeneralState<typeof ACTION_TYPE> {
   movies: IMovieData;
-  movie_detail: {};
+  movie_detail: IMovieDetail;
+  search_result: {};
 }
 
 const initialState: IMoviesState = {
@@ -29,10 +37,12 @@ const initialState: IMoviesState = {
     total_pages: 0,
     total_results: 0,
   },
-  movie_detail: {},
+  movie_detail: EMPTY_MOVIE_DETAIL,
+  search_result: {},
   requests: {
     GET_MOVIES: REQUEST_STATUS.IDLE,
     GET_MOVIE_DETAIL: REQUEST_STATUS.IDLE,
+    GET_SEARCH_BY_TITLE: REQUEST_STATUS.IDLE,
   },
 };
 
@@ -59,6 +69,17 @@ export const getMovieDatail = createAsyncThunk<IMovieDetail, {id: number}>(
   },
 );
 
+export const getSearchMovieByTitle = createAsyncThunk<
+  IMovieSearchResult,
+  {query: string}
+>(ACTION_TYPE.GET_SEARCH_BY_TITLE, async ({query}) => {
+  const apiResponse = await Get.getSearchMovieByTitle(query);
+  if (apiResponse.status === 200) {
+    return apiResponse.data as IMovieSearchResult;
+  }
+  throw Error(getApiErrorMessage(apiResponse, 'Failed getting Detail.'));
+});
+
 const moviesSlice = createSlice({
   name: 'moviesSlice',
   initialState,
@@ -76,18 +97,19 @@ const moviesSlice = createSlice({
         state.movies = payload;
       })
       .addCase(getMoviesAction.rejected, state => {
-        state.movies = {
-          page: 0,
-          results: [],
-          total_pages: 0,
-          total_results: 0,
-        };
+        state.movies = {} as IMovieData;
       })
       .addCase(getMovieDatail.fulfilled, (state, {payload}) => {
         state.movie_detail = payload;
       })
       .addCase(getMovieDatail.rejected, state => {
-        state.movie_detail = {};
+        state.movie_detail = {} as IMovieDetail;
+      })
+      .addCase(getSearchMovieByTitle.fulfilled, (state, {payload}) => {
+        state.search_result = payload;
+      })
+      .addCase(getSearchMovieByTitle.rejected, state => {
+        state.search_result = {} as IMovieSearchResult;
       })
       .addMatcher(isPending, (state, action) => {
         const request = action.type.split('/')[0] as IActionType;
