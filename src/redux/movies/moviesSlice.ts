@@ -27,7 +27,7 @@ type IActionType = keyof typeof ACTION_TYPE;
 export interface IMoviesState extends IGeneralState<typeof ACTION_TYPE> {
   movies: IMovieData;
   movie_detail: IMovieDetail;
-  search_result: {};
+  search_result: IMovieSearchResult;
 }
 
 const initialState: IMoviesState = {
@@ -38,7 +38,7 @@ const initialState: IMoviesState = {
     total_results: 0,
   },
   movie_detail: EMPTY_MOVIE_DETAIL,
-  search_result: {},
+  search_result: {} as IMovieSearchResult,
   requests: {
     GET_MOVIES: REQUEST_STATUS.IDLE,
     GET_MOVIE_DETAIL: REQUEST_STATUS.IDLE,
