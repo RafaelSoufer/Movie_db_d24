@@ -41,7 +41,7 @@ export const CloseContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 15px;
+    border-radius: 20px;
     background: rgba(0, 0, 0, 0.8);
   }
 `;
@@ -58,12 +58,13 @@ export const InputSearch = styled.input<{hasquery: string}>`
   color: white;
   outline: none;
   transition: 0.5s;
+  background: rgba(0, 0, 0, 0.4);
   &::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
   }
   ${InputSearchConatiner}:hover & {
     width: 350px;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     padding-left: 60px;
   }
@@ -71,7 +72,7 @@ export const InputSearch = styled.input<{hasquery: string}>`
     `${
       props.hasquery.length > 0 &&
       `width: 350px;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     padding-left: 60px;`
     }`}
@@ -81,7 +82,8 @@ export const SearchList = styled.ul`
   position: absolute;
   z-index: 99999;
   padding-inline-start: 0;
-  top: 70px;
+  top: 72px;
+  margin-left: 20px;
   color: white;
   list-style-type: none;
   max-height: 600px;

@@ -9,7 +9,7 @@ export const Conatiner = styled.div`
 export const CardImg = styled.img`
   height: 230px;
   @media (max-width: ${MOBILE_BREAKPOINT}) {
-    height: 150px;
+    height: 140px;
   }
 `;
 
@@ -21,7 +21,7 @@ export const Content = styled.div`
   @media (max-width: ${MOBILE_BREAKPOINT}) {
     font-size: 0.7rem;
     font-weight: 400;
-    max-width: 14ch;
+    max-width: 13ch;
   }
 `;
 

@@ -27,8 +27,8 @@ const HorizonatlImgList = ({ children, title }: IProps) => {
             {
                 breakpoint: parseInt(MOBILE_BREAKPOINT),
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                 }
             },
         ]
