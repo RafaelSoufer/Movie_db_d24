@@ -87,6 +87,9 @@ const moviesSlice = createSlice({
     resetRequestStatus(state, {payload}: PayloadAction<IActionType>) {
       state.requests[payload] = REQUEST_STATUS.IDLE;
     },
+    resetSearch(state) {
+      state.search_result = {} as IMovieSearchResult;
+    },
     resetSlice() {
       return {...initialState};
     },

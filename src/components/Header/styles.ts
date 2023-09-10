@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-
-export const TABLET_BREAKPOINT = '1230px';
-export const MOBILE_BREAKPOINT = '660px';
+import {MOBILE_BREAKPOINT, TABLET_BREAKPOINT} from '../../utils';
 
 export const HeaderContainer = styled.div`
-z-index: 99;
+  z-index: 99;
   height: 60px;
   z-index: 10;
   width: 100%;
@@ -13,10 +11,9 @@ z-index: 99;
   flex-direction: row;
   align-items: center;
   top: 0px;
-  background: rgba(255,255,255, 0.3);
+  background: rgba(255, 255, 255, 0.3);
   border-bottom: 1px solid white;
 `;
-
 
 export const HeaderContent = styled.div`
   width: 100%;
@@ -27,7 +24,7 @@ export const HeaderContent = styled.div`
   margin: 0 20px 0 50px;
 
   @media (max-width: ${TABLET_BREAKPOINT}) {
-    margin: 0  70px;
+    margin: 0 70px;
     justify-content: initial;
     & > *:first-child {
       justify-self: center;
@@ -69,15 +66,3 @@ export const ErrorContainer = styled.div`
     top: 90%;
   }
 `;
-
-
-
-
-
-
-
-
-
-
-
-

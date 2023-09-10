@@ -1,3 +1,6 @@
+export const TABLET_BREAKPOINT = '1230px';
+export const MOBILE_BREAKPOINT = '660px';
+
 export const EMPTY_MOVIE = {
   adult: false,
   backdrop_path: '',
