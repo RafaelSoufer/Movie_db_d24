@@ -1,4 +1,4 @@
-import {AxiosResponse} from 'axios';
+import {AxiosError, AxiosResponse} from 'axios';
 
 export const REQUEST_STATUS = {
   IDLE: 'IDLE',
@@ -18,8 +18,6 @@ export const getApiErrorMessage = (
   response: AxiosResponse,
   fallback: string,
 ) => {
-  return (
-    // (response as unknown as AxiosError).response?.data?.errors?.[0].message ||
-    fallback
-  );
+  const axiosError = response as unknown as AxiosError;
+  return axiosError.message || fallback;
 };

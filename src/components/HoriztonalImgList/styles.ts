@@ -8,4 +8,5 @@ export const Container = styled.div`
 
 export const Title = styled.h2`
   color: white;
+  text-shadow: 5px 5px 20px rgba(23, 15, 61, 0.94);
 `;

@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Container, Title } from './styles';
+import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from '../../utils';
 
 interface IProps {
     children: ReactNode;
@@ -17,14 +18,14 @@ const HorizonatlImgList = ({ children, title }: IProps) => {
         infinite: true,
         responsive: [
             {
-                breakpoint: 1230,
+                breakpoint: parseInt(TABLET_BREAKPOINT),
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
                 }
             },
             {
-                breakpoint: 660,
+                breakpoint: parseInt(MOBILE_BREAKPOINT),
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,

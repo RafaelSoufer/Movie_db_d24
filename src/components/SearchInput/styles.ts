@@ -11,6 +11,7 @@ export const Conatiner = styled.div`
     justify-content: center;
     right: 0;
     top: 30px;
+    margin-bottom: 70px;
   }
 `;
 
@@ -42,7 +43,7 @@ export const CloseContainer = styled.div`
   }
 `;
 
-export const InputSearch = styled.input<{hasQuery: boolean}>`
+export const InputSearch = styled.input<{hasquery: string}>`
   padding: 40px;
   width: 80px;
   height: 80px;
@@ -65,7 +66,7 @@ export const InputSearch = styled.input<{hasQuery: boolean}>`
   }
   ${props =>
     `${
-      props.hasQuery &&
+      props.hasquery.length > 0 &&
       `width: 350px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 10px;

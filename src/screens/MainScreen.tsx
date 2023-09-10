@@ -3,7 +3,7 @@ import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { getMovieDatail, getMoviesAction, getSearchMovieByTitle, moviesActions } from '../redux/movies/moviesSlice';
 import { movieDetailSelector, movieSearchByTitleSelector, moviesRequestSelector, moviesSelector } from '../redux/movies/selectors';
-import { Container, BGImage, Content, MovieInfoContainer, MovieTitle, MovieDescription } from './styles';
+import { Container, Content, MovieInfoContainer, MovieTitle, MovieDescription, MovieYear, MoviePoster, LoaderContainer } from './styles';
 import { REQUEST_STATUS } from '../redux/general';
 import Header from '../components/Header/Header';
 import { IMovieDetail, IMovieResult, IMovieSearch } from '../api/moviesRequests';
@@ -14,8 +14,7 @@ import ImageCard from '../components/ImgCard/ImgCard';
 import { IMAGES_BASE_URL } from '../api/API';
 import HorizonatlImgList from '../components/HoriztonalImgList/HorizonatlImgLis';
 import { TailSpin } from 'react-loader-spinner';
-
-
+import BGImage from '../components/BGImage/BGIamge';
 
 
 
@@ -40,7 +39,7 @@ function MainScreen() {
     const [mainMovie, setMainMovie] = useState<IMovieResult>(EMPTY_MOVIE)
     const [selectedMovie, setSelectedMovie] = useState<IMovieSearch>()
 
-    const { poster_path, title, id, vote_count } = mainMovie as IMovieResult
+    const { poster_path, title, id, release_date } = mainMovie as IMovieResult
     const { overview } = movieDetail as IMovieDetail
 
     useEffect(() => {
@@ -53,14 +52,14 @@ function MainScreen() {
 
     useEffect(() => {
         debouncedValue && dispatch(getSearchMovieByTitle({ query: debouncedValue }))
+        dispatch(moviesActions.resetRequestStatus('GET_MOVIES'))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [debouncedValue, dispatch])
+    }, [debouncedValue])
 
 
     useEffect(() => {
         if (requestStatus.GET_MOVIES === REQUEST_STATUS.SUCCESS) {
             setMainMovie(moviesList[0])
-            dispatch(moviesActions.resetRequestStatus('GET_MOVIES'))
             id && dispatch(getMovieDatail({ id }));
         }
     }, [dispatch, id, moviesList, requestStatus.GET_MOVIES])
@@ -83,25 +82,32 @@ function MainScreen() {
                     noResultsTxt='No results :('
                 />
                 {isLoading ?
-                    <TailSpin
-                        height="50"
-                        width=""
-                        color="white"
-                        ariaLabel="tail-spin-loading"
-                        radius="1"
-                        wrapperStyle={{}}
-                        visible={true}
-                    />
+                    <LoaderContainer>
+                        <TailSpin
+                            height="50"
+                            width="50"
+                            color="white"
+                            ariaLabel="tail-spin-loading"
+                            radius="1"
+                            wrapperStyle={{}}
+                            visible={true}
+                        />
+                    </LoaderContainer>
                     :
                     <>
                         <Content>
                             <MovieInfoContainer>
+                                {
+                                    poster_path || selectedMovie?.poster_path ?
+                                        <MoviePoster src={`${IMAGES_BASE_URL}${poster_path ? poster_path : selectedMovie?.poster_path}`} />
+                                        : null
+                                }
                                 <MovieTitle>{selectedMovie?.title || title}</MovieTitle>
-                                <MovieDescription> {selectedMovie?.vote_count || vote_count} </MovieDescription>
+                                <MovieYear> {selectedMovie?.release_date.split('-')[0] || release_date?.split('-')[0]} </MovieYear>
                                 <MovieDescription> {selectedMovie?.overview || overview} </MovieDescription>
                             </MovieInfoContainer>
                             <HorizonatlImgList title='Popular and Trending'>
-                                {moviesList.map(image => <ImageCard imageUrl={`${IMAGES_BASE_URL}${image.poster_path}`} title={image.title} />)}
+                                {moviesList.map(image => <ImageCard key={image.id} imageUrl={`${IMAGES_BASE_URL}${image.poster_path}`} title={image.title} />)}
                             </HorizonatlImgList>
                         </Content>
                     </>

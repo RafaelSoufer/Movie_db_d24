@@ -15,6 +15,7 @@ import {
 } from '../../api/moviesRequests';
 import {getApiErrorMessage, IGeneralState, REQUEST_STATUS} from '../general';
 import {EMPTY_MOVIE_DETAIL} from '../../utils';
+import {toast} from 'react-toastify';
 
 const ACTION_TYPE = {
   GET_MOVIES: 'GET_MOVIES',
@@ -50,7 +51,13 @@ const initialState: IMoviesState = {
 export const getMoviesAction = createAsyncThunk<IMovieData, void>(
   ACTION_TYPE.GET_MOVIES,
   async () => {
-    const apiResponse = await Get.getMovies();
+    const apiResponse = await Get.getMovies()
+      .then(resp => {
+        return resp;
+      })
+      .catch(err => {
+        return err;
+      });
     if (apiResponse.status === 200) {
       return apiResponse.data as IMovieData;
     }
@@ -61,7 +68,13 @@ export const getMoviesAction = createAsyncThunk<IMovieData, void>(
 export const getMovieDatail = createAsyncThunk<IMovieDetail, {id: number}>(
   ACTION_TYPE.GET_MOVIE_DETAIL,
   async ({id}) => {
-    const apiResponse = await Get.getMovieDetails(id);
+    const apiResponse = await Get.getMovieDetails(id)
+      .then(resp => {
+        return resp;
+      })
+      .catch(err => {
+        return err;
+      });
     if (apiResponse.status === 200) {
       return apiResponse.data as IMovieDetail;
     }
@@ -73,7 +86,13 @@ export const getSearchMovieByTitle = createAsyncThunk<
   IMovieSearchResult,
   {query: string}
 >(ACTION_TYPE.GET_SEARCH_BY_TITLE, async ({query}) => {
-  const apiResponse = await Get.getSearchMovieByTitle(query);
+  const apiResponse = await Get.getSearchMovieByTitle(query)
+    .then(resp => {
+      return resp;
+    })
+    .catch(err => {
+      return err;
+    });
   if (apiResponse.status === 200) {
     return apiResponse.data as IMovieSearchResult;
   }
@@ -130,6 +149,7 @@ const moviesSlice = createSlice({
         const request = action.type.split('/')[0] as IActionType;
         if (state.requests?.[request]) {
           state.requests[request] = REQUEST_STATUS.FAILED;
+          toast.error(action.error.message);
         }
       });
   },

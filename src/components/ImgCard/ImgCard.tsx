@@ -1,5 +1,5 @@
 import React from 'react';
-import { Conatiner, Content } from './styles';
+import { CardImg, Conatiner, Content } from './styles';
 
 
 
@@ -12,7 +12,7 @@ interface IProps {
 const ImageCard = ({ imageUrl, title }: IProps) => {
     return (
         <Conatiner >
-            <img src={imageUrl} alt={title} height={230} />
+            <CardImg src={imageUrl} alt={title} />
             <Content>
                 <p>{title}</p>
             </Content>
