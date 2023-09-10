@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {MOBILE_BREAKPOINT} from '../utils';
 
 export const Container = styled.div<{imgpath?: string}>`
   width: 100%;
@@ -23,6 +24,9 @@ export const Content = styled.div`
   justify-content: center;
   padding: 0 100px;
   height: 100%;
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    padding: 0 50px;
+  }
 `;
 
 export const MovieInfoContainer = styled.div`
@@ -54,8 +58,12 @@ export const MoviePoster = styled.img`
   position: absolute;
   width: 690px;
   top: -100px;
-  left: -50px;
+
   z-index: -2;
   transform: rotate(-15deg);
   overflow: hidden;
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 360px;
+    left: 0px;
+  }
 `;

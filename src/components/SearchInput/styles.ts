@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {MOBILE_BREAKPOINT} from '../../utils';
+import {MOBILE_BREAKPOINT, TABLET_BREAKPOINT} from '../../utils';
 
 export const Conatiner = styled.div`
   display: flex;
@@ -7,9 +7,12 @@ export const Conatiner = styled.div`
   justify-content: flex-end;
   right: 100px;
   top: 40px;
+  @media (max-width: ${TABLET_BREAKPOINT}) {
+    margin-bottom: 70px;
+  }
   @media (max-width: ${MOBILE_BREAKPOINT}) {
     justify-content: center;
-    right: 0;
+    right: 10px;
     top: 30px;
     margin-bottom: 70px;
   }

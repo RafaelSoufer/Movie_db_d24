@@ -17,4 +17,20 @@ export const Content = styled.div`
   color: white;
   font-size: 0.9rem;
   font-weight: 400;
+  max-width: 17ch;
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    font-size: 0.7rem;
+    font-weight: 400;
+    max-width: 14ch;
+  }
+`;
+
+export const Text = styled.p`
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  text-align: center;
+  border-radius: 5px;
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+  }
 `;

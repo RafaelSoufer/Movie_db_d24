@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardImg, Conatiner, Content } from './styles';
+import { CardImg, Conatiner, Content, Text } from './styles';
 
 
 
@@ -14,7 +14,7 @@ const ImageCard = ({ imageUrl, title }: IProps) => {
         <Conatiner >
             <CardImg src={imageUrl} alt={title} />
             <Content>
-                <p>{title}</p>
+                <Text>{title}</Text>
             </Content>
         </Conatiner>
     );

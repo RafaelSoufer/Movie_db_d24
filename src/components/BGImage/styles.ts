@@ -12,7 +12,7 @@ export const StyledBGImage = styled.div<{imgpath: string | undefined}>`
   display: flex;
   background: ${props =>
     `
-    linear-gradient(to bottom, rgba(245, 246, 252, 0.3), rgba(117, 19, 93, 0.5),rgba(255, 255, 255, 1) ),
+    linear-gradient(to bottom, rgba(245, 246, 252, 0.3) 0%, rgba(117, 19, 93, 0.3) 25%, rgba(117, 19, 93, 0.4) 50%, rgba(255, 255, 255, 1) 100%),
     url( ${` ${
       props.imgpath
         ? `${IMAGES_BASE_URL}${props.imgpath}`
